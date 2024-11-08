@@ -50,4 +50,18 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 
+	/**
+	 * Handles {@link IllegalArgumentException} by returning a 400 error with a {@link StandardError} containing the error message.
+	 * @param e the exception to handle
+	 * @param request the current HTTP request
+	 * @return a ResponseEntity with a 400 status and a {@link StandardError} in the body
+	 */
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<StandardError> illegalArgumentException(IllegalArgumentException e, HttpServletRequest request){
+		String error = "Format string error";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+
 }

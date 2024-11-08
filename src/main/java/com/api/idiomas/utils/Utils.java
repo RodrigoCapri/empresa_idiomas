@@ -47,4 +47,50 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Formats a CPF number.
+	 * 
+	 * @param cpf - CPF number to be formatted.
+	 * @return The formatted CPF number.
+	 * @throws IllegalArgumentException if the CPF number is invalid.
+	 */
+	public static String formataCpf(String cpf) {
+
+		if (cpf.length() != 11) 
+			throw new IllegalArgumentException("Cpf inválido");
+
+		return String.format("%s.%s.%s-%s", cpf.substring(0, 3), cpf.substring(3, 6), cpf.substring(6, 9), cpf.substring(9, 11));
+	}
+
+	
+	/**
+	 * Formats a cellular number.
+	 * 
+	 * @param celular - Cellular number to be formatted.
+	 * @return The formatted cellular number.
+	 * @throws IllegalArgumentException if the cellular number is invalid.
+	 */
+	public static String formataCelular(String celular) {
+
+		if (celular.length() != 11) 
+			throw new IllegalArgumentException("Celular inválido");
+
+		return String.format("(%s) %s-%s", celular.substring(0, 2), celular.substring(2, 6), celular.substring(6, 11));
+	}
+
+	/**
+	 * Formats a cep number.
+	 * 
+	 * @param cep - Cep number to be formatted.
+	 * @return The formatted cep number.
+	 * @throws IllegalArgumentException if the cep number is invalid.
+	 */
+	public static String formataCep(String cep) {
+
+		if (cep.length() != 8)	
+			throw new IllegalArgumentException("Cep inválido");
+
+		return String.format("%s-%s", cep.substring(0, 5), cep.substring(5, 8));
+	}
+
 }
