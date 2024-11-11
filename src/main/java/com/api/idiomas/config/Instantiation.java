@@ -1,5 +1,6 @@
 package com.api.idiomas.config;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -8,10 +9,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.api.idiomas.entities.Aluno;
+import com.api.idiomas.entities.Matricula;
 import com.api.idiomas.entities.Turma;
 import com.api.idiomas.enums.Idiomas;
 import com.api.idiomas.enums.NivelTurma;
+import com.api.idiomas.enums.StatusMatricula;
 import com.api.idiomas.repositories.AlunoRepository;
+import com.api.idiomas.repositories.MatriculaRepository;
 import com.api.idiomas.repositories.TurmaRepository;
 import com.api.idiomas.utils.Utils;
 
@@ -30,6 +34,9 @@ public class Instantiation implements CommandLineRunner{
     @Autowired
     private TurmaRepository turmaRepository;
 
+    @Autowired
+    private MatriculaRepository matriculaRepository;
+
     /**
      * Initializes the database by creating three Aluno entities and three Turma entities
      * if the database is empty.
@@ -42,30 +49,31 @@ public class Instantiation implements CommandLineRunner{
         Locale.setDefault(Locale.US);
         System.setProperty("file.encoding", "UTF-8");
 
+        matriculaRepository.deleteAll();
         alunoRepository.deleteAll();
         turmaRepository.deleteAll();
 
-        if (alunoRepository.count() == 0) {
+        //Criando e salvando alunos na base de dados
+        Aluno aluno1 = new Aluno(null, "Luan Santana", Utils.formataCpf("00011133344"), "luan@gmail.com", Utils.formataCelular("42999999999"), "Rua das Bananeiras, 123", "São Paulo", "SP", Utils.formataCep("00000000"), "Centro");
 
-            Aluno aluno1 = new Aluno(null, "Luan Santana", Utils.formataCpf("00011133344"), "luan@gmail.com", Utils.formataCelular("42999999999"), "Rua das Bananeiras, 123", "São Paulo", "SP", Utils.formataCep("00000000"), "Centro");
+        Aluno aluno2 = new Aluno(null, "Igor Pereira", Utils.formataCpf("11122233344"), "igor@gmail.com", Utils.formataCelular("41299997777"), "Rua Cereja, 772", "Resende", "RJ", Utils.formataCep("11111111"), "Contorno");
 
-            Aluno aluno2 = new Aluno(null, "Igor Pereira", Utils.formataCpf("11122233344"), "igor@gmail.com", Utils.formataCelular("41299997777"), "Rua Cereja, 772", "Resende", "RJ", Utils.formataCep("11111111"), "Contorno");
+        Aluno aluno3 = new Aluno(null, "Maria Brown", Utils.formataCpf("44455566677"), "maria@gmail.com", Utils.formataCelular("11955555555"), "Marginal Tietê, 007", "São Paulo", "SP", Utils.formataCep("99999999"), "Penha");
 
-            Aluno aluno3 = new Aluno(null, "Maria Brown", Utils.formataCpf("44455566677"), "maria@gmail.com", Utils.formataCelular("11955555555"), "Marginal Tietê, 007", "São Paulo", "SP", Utils.formataCep("99999999"), "Penha");
+        alunoRepository.saveAll(Arrays.asList(aluno1,aluno2,aluno3));
 
-            alunoRepository.saveAll(Arrays.asList(aluno1,aluno2,aluno3));
-            
-        }
+        //Criando e salvando turmas na base de dados
+        Turma turma1 = new Turma(null, "Turma 1", "Turma do Barulho",NivelTurma.BASICO, Idiomas.INGLES);
+        Turma turma2 = new Turma(null, "Turma 2", "Galera do Job",NivelTurma.AVANCADO, Idiomas.FRANCES);
 
-        if(turmaRepository.count() == 0) {
+        Matricula matricula1 = new Matricula(aluno1, turma1, StatusMatricula.PENDENTE, Instant.parse("2020-06-20T21:53:07Z"), null, null, null);
 
-            Turma turma1 = new Turma(null, "Turma 1", "Turma do barulho", NivelTurma.AVANCADO, Idiomas.INGLES);
-            Turma turma2 = new Turma(null, "Turma 2", "Os desempregados", NivelTurma.BASICO, Idiomas.FRANCES);
-            Turma turma3 = new Turma(null, "Turma 3", "Os sobreviventes", NivelTurma.INTERMEDIARIO, Idiomas.ESPANHOL);
+        Matricula matricula2 = new Matricula(aluno2, turma2, StatusMatricula.CONFIRMADA, Instant.parse("2019-07-20T21:53:07Z"), null, Instant.now(), null);
 
-            turmaRepository.saveAll(Arrays.asList(turma1, turma2, turma3));
-            
-        }
+        Matricula matricula3 = new Matricula(aluno3, turma1, StatusMatricula.CANCELADA, Instant.parse("2024-06-20T21:53:07Z"), Instant.now(), null, null);
+        
+        turmaRepository.saveAll(Arrays.asList(turma1,turma2));
+        matriculaRepository.saveAll(Arrays.asList(matricula1,matricula2,matricula3));
 
     }
 
