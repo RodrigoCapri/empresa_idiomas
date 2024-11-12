@@ -40,18 +40,18 @@ public class Matricula implements Serializable{
 
     private StatusMatricula statusMatricula;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant dataMatricula;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+    private Date dataMatricula;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant dataCancelamento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+    private Date dataCancelamento;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private Instant dataConfirmacao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT")
+    private Date dataConfirmacao;
 
     private Date inicioAula;
 
-    public Matricula(Aluno aluno, Turma turma, StatusMatricula statusMatricula, Instant dataMatricula, Instant dataCancelamento, Instant dataConfirmacao, Date inicioAula) {
+    public Matricula(Aluno aluno, Turma turma, StatusMatricula statusMatricula, Date dataMatricula, Date dataCancelamento, Date dataConfirmacao, Date inicioAula) {
 
         this.id.setAluno(aluno);
         this.id.setTurma(turma);

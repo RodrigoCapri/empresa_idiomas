@@ -36,14 +36,14 @@ public class Utils {
 	 * @param defaultValue - Default date to be returned if conversion fails.
 	 * @return The converted Date object or the default value if conversion fails.
 	 */
-	public static Date convertDate(String textDate, Date defaultValue) { //Metodo para converter string em data
+	public static Date formatData(String textDate) { //Metodo para converter string em data
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		try {
 			return sdf.parse(textDate);
 		} catch (ParseException e) {
-			return defaultValue;
+			throw new IllegalArgumentException("Formato de data inválido");
 		}
 	}
 
@@ -75,7 +75,7 @@ public class Utils {
 		if (celular.length() != 11) 
 			throw new IllegalArgumentException("Celular inválido");
 
-		return String.format("(%s) %s-%s", celular.substring(0, 2), celular.substring(2, 6), celular.substring(6, 11));
+		return String.format("(%s) %s-%s", celular.substring(0, 2), celular.substring(2, 7), celular.substring(7, 11));
 	}
 
 	/**

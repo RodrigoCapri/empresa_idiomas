@@ -2,6 +2,7 @@ package com.api.idiomas.config;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +67,11 @@ public class Instantiation implements CommandLineRunner{
         Turma turma1 = new Turma(null, "Turma 1", "Turma do Barulho",NivelTurma.BASICO, Idiomas.INGLES);
         Turma turma2 = new Turma(null, "Turma 2", "Galera do Job",NivelTurma.AVANCADO, Idiomas.FRANCES);
 
-        Matricula matricula1 = new Matricula(aluno1, turma1, StatusMatricula.PENDENTE, Instant.parse("2020-06-20T21:53:07Z"), null, null, null);
+        Matricula matricula1 = new Matricula(aluno1, turma1, StatusMatricula.PENDENTE, Utils.formatData("2020-06-20"), null, null, Utils.formatData("2020-06-20"));
 
-        Matricula matricula2 = new Matricula(aluno2, turma2, StatusMatricula.CONFIRMADA, Instant.parse("2019-07-20T21:53:07Z"), null, Instant.now(), null);
+        Matricula matricula2 = new Matricula(aluno2, turma2, StatusMatricula.CONFIRMADA, Utils.formatData("2023-12-03"), null, Utils.formatData("2024-02-18"), Utils.formatData("2021-06-14"));
 
-        Matricula matricula3 = new Matricula(aluno3, turma1, StatusMatricula.CANCELADA, Instant.parse("2024-06-20T21:53:07Z"), Instant.now(), null, null);
+        Matricula matricula3 = new Matricula(aluno3, turma1, StatusMatricula.CANCELADA, Utils.formatData("2022-07-25"), Utils.formatData("2022-08-01"), null, Utils.formatData("2023-12-08"));
         
         turmaRepository.saveAll(Arrays.asList(turma1,turma2));
         matriculaRepository.saveAll(Arrays.asList(matricula1,matricula2,matricula3));

@@ -1,7 +1,7 @@
 package com.api.idiomas.entities.dtos;
 
 import com.api.idiomas.entities.Matricula;
-import com.api.idiomas.entities.pks.AlunoTurmaPK;
+import com.api.idiomas.enums.StatusMatricula;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +20,17 @@ import lombok.ToString;
 @ToString
 public class MatriculaDTO {
 
-    private AlunoTurmaPK id;
-    private AlunoDTO aluno;
-    private TurmaDTO turma;
+    private Long id_aluno;
+    private Long id_turma;
+    private StatusMatricula statusMatricula;
 
     public MatriculaDTO(Matricula matricula) {
 
-        this.aluno = new AlunoDTO(matricula.getId().getAluno());
-        this.turma = new TurmaDTO(matricula.getId().getTurma());
+        this.id_aluno = matricula.getId().getAluno().getId();
+        this.id_turma = matricula.getId().getTurma().getId();
+
+        this.statusMatricula = matricula.getStatusMatricula();
+        
     }
 
 }
