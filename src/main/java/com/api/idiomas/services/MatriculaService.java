@@ -1,13 +1,11 @@
 package com.api.idiomas.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.idiomas.entities.Matricula;
-import com.api.idiomas.entities.dtos.MatriculaDTO;
 import com.api.idiomas.repositories.MatriculaRepository;
 import com.api.idiomas.services.exceptions.ResourceNotFoundException;
 
